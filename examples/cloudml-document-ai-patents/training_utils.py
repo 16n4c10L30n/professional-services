@@ -169,7 +169,7 @@ def convert_pdfs(main_project_id,
 
   # Create Bucket if it doesn"t exist
   subprocess.run(
-      f"gsutil mb -p {main_project_id} gs://{output_bucket_name}",
+      f"gsutil mb -c regional -l us-central1 -p {main_project_id} gs://{output_bucket_name}",
       shell=True)
 
   subprocess.run(
@@ -429,7 +429,7 @@ def run_ocr(project_id, output_directory, temp_directory, service_acct):
   # make sure bucket exists
   output_bucket_name = project_id + "-lcm"
   subprocess.run(
-    f"gsutil mb -p {project_id} gs://{output_bucket_name}", shell=True)
+    f"gsutil mb -c regional -l us-central1 -p {project_id} gs://{output_bucket_name}", shell=True)
 
   for blob in blobs:
     if blob.name.endswith(".png"):
